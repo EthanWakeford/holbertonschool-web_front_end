@@ -138,7 +138,7 @@ a:active {
     --nav-item-letter-spacing: .04rem;
     --nav-item-display: inline-block;
     --nav-item-margin: 0 0 3rem 0;
-    --nav-item-link-hover: var(--color-primary);
+    --nav-item-link-hover: var(--color-white);
     --section-tagline-margin: 0;
     --button-display: inline-block;
     --button-padding: 1.5rem 3rem;
@@ -302,4 +302,19 @@ ul.row {
     position: var(--header-logo-link-position);
     top: var(--header-logo-link-top);
     left: var(--header-logo-link-left);
+}
+
+.nav .nav-link::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: var(--color-white);
+    width: 0;
+    height: 0.2rem; 
+}
+
+.nav .nav-item:hover .nav-link::before {
+    background-color: var(--color-primary);
+    width: 100%;
 }
