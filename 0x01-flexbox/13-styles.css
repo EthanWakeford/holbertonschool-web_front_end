@@ -767,6 +767,9 @@ ul.row {
 }
 
 .tag-list li::after {
-  content: "";
+  content: ", ";
 }
 
+.tag-list li::after:last-child {
+  content: "";
+}
