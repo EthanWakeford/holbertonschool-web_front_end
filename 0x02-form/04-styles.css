@@ -847,6 +847,7 @@ input[type="text"], input[type="email"], textarea {
   border: .1rem solid var(--color-black);
   box-shadow: none;
   outline: 0;
+  background-color: var(--color-white);
 }
 
 input[type="text"], input[type="email"] {
@@ -854,7 +855,7 @@ input[type="text"], input[type="email"] {
 }
 
 input[type="text"], input[type="email"], textarea:focus {
-  border: .1rem var(--color-grey);
+  border: .1rem solid var(--color-grey);
   background-color: var(--color-light-grey);
 }
 
