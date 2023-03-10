@@ -4,6 +4,6 @@ function welcomeMessage(fullName) {
   }
 }
 
-guillaume = welcomeMessage('Guillaume');
-alex = welcomeMessage('Alex');
-fred = welcomeMessage('Fred');
+let guillaume = welcomeMessage('Guillaume');
+let alex = welcomeMessage('Alex');
+let fred = welcomeMessage('Fred');
