@@ -9,7 +9,7 @@ function createElement(data) {
 function queryWikipedia(callback) {
   const req = new XMLHttpRequest();
   req.open('get', 'https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles=Stack%20Overflow&origin=*')
-  req.onreadystatechange = () {
+  req.onreadystatechange = () => {
     callback(req.responseText);
   }
   req.send();
