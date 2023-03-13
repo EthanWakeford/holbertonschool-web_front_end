@@ -18,15 +18,12 @@ function countPrimeNumbers() {
   return count;
 }
 
-function execute() {
-  for (let i = 0; i <= 99; i++) {
-    setTimeout(countPrimeNumbers());
-  }
-}
-
-timeoutId = setTimeout(execute(), 1000);
 const t1 = performance.now();
-clearTimeout(timeoutId);
+setTimeout(() => {
+  for (let i = 0; i <= 99; i++) {
+    countPrimeNumbers();
+  }
+}, 0);
 const t2 = performance.now();
 
 console.log(`Execution time of calculating prime numbers 100 times was ${t2 - t1} milliseconds.`);
