@@ -7,7 +7,9 @@
   <script>
     function createFamilyTree() {
       $('body').append('<table></table>');
-      $('table').append('<tr class="head"></tr>', '<tr class="guillame"></tr>', '<tr class=paulette></tr>', '<tr class=antoine></tr>');
+      $('table').append('<thead></thead>', '<tbody></tbody>');
+      $('thead').append('<tr class="head"></tr>');
+      $('tbody').append('<tr class="guillame"></tr>', '<tr class=paulette></tr>', '<tr class=antoine></tr>');
       $('.head').append('<th>Firstname</th><th>Lastname</th>');
       $('.guillame').append('<td>Guillame</td><td>Salva</td>');
       $('.paulette').append('<td>Paulette</td><td>Salva</td>');
