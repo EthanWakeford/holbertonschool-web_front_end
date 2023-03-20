@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
+    crossorigin="anonymous"></script>
+  <script>
+    function createSearchForm() {
+      console.log("creating");
+      $("body").append(
+        `<input type="text">
+        <input type="submit">
+        <ul></ul>
+        <ul id="pagination"></ul>`
+      );
+      $("input[type=submit]").click(function () {
+        queryWikipedia($("input[type=text]").val());
+      });
+    }
+
+    function addNewArticle(id, title, snippet) {
+      $("ul").append(
+        `<li>
+          <p><span>${id} -<b>${title}</b></span></p>
+          <p>${snippet}</p>
+        </li>`
+      );
+    }
+
+    function queryWikipedia(search, offset = 0) {
+      console.log("querying", offset);
+      displayLoading(true);
+      $.ajax({
+        type: "GET",
+        url: `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${search}&format=json&sroffset=${offset}`,
+        dataType: "jsonp",
+        success: function (data) {
+          for (let item of data.query.search) {
+            addNewArticle(item.pageid, item.title, item.snippet);
+          }
+          buildPagination(data.query.searchinfo.totalhits, 10, offset);
+        }
+      });
+      displayLoading(false);
+    }
+
+    function buildPagination(numberOfItems, itemsPerPage, currentOffset) {
+      $("#pagination").empty();
+      console.log(numberOfItems, itemsPerPage);
+      for (let i = 1; i <= numberOfItems / itemsPerPage + 1; i++) {
+        $("#pagination")
+          .append(`<li>${i}</li>`)
+          .css({ cursor: "pointer", "font-size": "10px", margin: "left" });
+        if (currentOffset == 0) {
+          $("#pagination li").first().css("font-weight", "bold");
+        }
+        if (i == currentOffset / itemsPerPage) {
+          $("#pagination li").last().css("font-weight", "bold");
+        }
+      }
+      $("#pagination").css({ display: "block", "list-style-type": "none" });
+      $("#pagination li").click(function () {
+        queryWikipedia(
+          $('input[type="text"]').val(),
+          $(this).text() * itemsPerPage
+        );
+      });
+    }
+
+    function displayLoading(loading) {
+      list = $("ul").first();
+
+      if (loading) {
+        list.wrap('<div class="loading"></div>');
+      } else {
+        list.unwrap();
+      }
+    }
+
+    $(document).ready(function () {
+      createSearchForm();
+    });
+  </script>
+  <style>
+    .loading {
+      opacity: 0.2;
+    }
+
+  </style>
+  <meta charset="utf-8" />
+  <title>Task 0</title>
+</head>
+
+<body></body>
+
+</html>
