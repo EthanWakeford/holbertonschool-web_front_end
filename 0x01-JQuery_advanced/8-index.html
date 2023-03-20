@@ -53,6 +53,7 @@
           $('#pagination li').last().css('font-weight', 'bold');
         }
       }
+      $('#pagination').css({'display': 'block', 'list-style-type': 'none'});
       $('#pagination li').click(function() {
         queryWikipedia($('input[type="text"]').val(), $(this).text() * itemsPerPage)
       })
