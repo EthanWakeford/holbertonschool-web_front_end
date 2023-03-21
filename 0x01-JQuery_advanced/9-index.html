@@ -39,9 +39,9 @@
             addNewArticle(item.pageid, item.title, item.snippet);
           }
           buildPagination(data.query.searchinfo.totalhits, 10, offset);
+          displayLoading(false);
         }
       });
-      displayLoading(false);
     }
 
     function buildPagination(numberOfItems, itemsPerPage, currentOffset) {
@@ -49,8 +49,7 @@
       console.log(numberOfItems, itemsPerPage);
       for (let i = 1; i <= numberOfItems / itemsPerPage + 1; i++) {
         $("#pagination")
-          .append(`<li>${i}</li>`)
-          .css({ cursor: "pointer", "font-size": "10px", margin: "left" });
+          .append(`<li>${i}</li>`);
         if (currentOffset == 0) {
           $("#pagination li").first().css("font-weight", "bold");
         }
@@ -58,22 +57,20 @@
           $("#pagination li").last().css("font-weight", "bold");
         }
       }
-      $("#pagination").css({ display: "block", "list-style-type": "none" });
-      $("#pagination li").click(function () {
-        queryWikipedia(
-          $('input[type="text"]').val(),
-          $(this).text() * itemsPerPage
-        );
+      $("#pagination").css({ 'display': "block", "list-style-type": "none" });
+      $("#pagination li").css({ 'cursor': "pointer", 'margin-left': "10px", 'float': 'left' })
+        .click(function () {
+          queryWikipedia(
+            $('input[type="text"]').val(),
+            $(this).text() * itemsPerPage);
       });
     }
 
     function displayLoading(loading) {
-      list = $("ul").first();
-
       if (loading) {
-        list.wrap('<div class="loading"></div>');
+        $("ul").first().wrap('<div class="loading"></div>');
       } else {
-        list.unwrap();
+        $("ul").first().unwrap();
       }
     }
 
